@@ -1,6 +1,6 @@
 import InvalidPurchaseException from './lib/InvalidPurchaseException.js';
-import TicketPaymentService from './TicketPaymentService.js';
-import SeatReservationService from './SeatReservationService.js';
+import TicketPaymentService from '../thirdparty/paymentgateway/TicketPaymentService.js';
+import SeatReservationService from '../thirdparty/seatbooking/SeatReservationService.js';
 
 export default class TicketService {
   constructor() {
