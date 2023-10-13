@@ -43,21 +43,23 @@ export default class TicketService {
       throw new InvalidPurchaseException('Invalid purchase: Must purchase between 1 and 20 tickets with at least one adult ticket.');
     }
   }
-
     // Private method responsible to calculate the total price (Only using it as a naming convention with "_" at the start)
   _calculateTotalPrice(ticketTypeRequests) {
-    return ticketTypeRequests.reduce((total, request) => {
-      return total + this.ticketPrices[request.type] * request.noOfTickets;
-    }, 0);
+    let totalAmountToPay = 0;
+    for (const request of ticketTypeRequests) {
+      totalAmountToPay += this.ticketPrices[request.type] * request.noOfTickets;
+    }
+    return totalAmountToPay;
   }
 
     // Private method responsible to keep count of the number of adult tickets
   _getAdultTicketCount(ticketTypeRequests) {
-    return ticketTypeRequests.reduce((count, request) => {
+    let adultTicketCount = 0;
+    for (const request of ticketTypeRequests) {
       if (request.type === 'ADULT') {
-        return count + request.noOfTickets;
+        adultTicketCount += request.noOfTickets;
       }
-      return count;
-    }, 0);
+    }
+    return adultTicketCount;
   }
 }
